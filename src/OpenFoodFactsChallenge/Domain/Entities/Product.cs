@@ -1,13 +1,13 @@
-﻿namespace OpenFoodFactsChallenge.Entities;
+﻿namespace OpenFoodFactsChallenge.Domain.Entities;
 
-public class Product(long code, 
-    string barcode, 
-    string url, 
-    string productName, 
-    string quantity, 
-    string categories, 
-    string packaging, 
-    string brands, 
+public class Product(long code,
+    string barcode,
+    string url,
+    string productName,
+    string quantity,
+    string categories,
+    string packaging,
+    string brands,
     string imageUrl)
 {
     public long Code { get; private set; } = code;
