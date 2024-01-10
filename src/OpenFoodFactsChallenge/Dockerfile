@@ -9,15 +9,14 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["src/OpenFoodFactsChallenge/OpenFoodFactsChallenge.csproj", "src/OpenFoodFactsChallenge/"]
-RUN dotnet restore "./src/OpenFoodFactsChallenge/./OpenFoodFactsChallenge.csproj"
+COPY "OpenFoodFactsChallenge.csproj" "OpenFoodFactsChallenge/OpenFoodFactsChallenge.csproj"
+RUN dotnet restore "OpenFoodFactsChallenge/OpenFoodFactsChallenge.csproj"
 COPY . .
-WORKDIR "/src/src/OpenFoodFactsChallenge"
-RUN dotnet build "./OpenFoodFactsChallenge.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "OpenFoodFactsChallenge.csproj" -c $BUILD_CONFIGURATION -o /app/build /p:UseAppHost=false
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./OpenFoodFactsChallenge.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "OpenFoodFactsChallenge.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app

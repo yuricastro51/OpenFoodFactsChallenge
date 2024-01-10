@@ -1,7 +1,9 @@
-﻿namespace OpenFoodFactsChallenge.Domain.Entities;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace OpenFoodFactsChallenge.Domain.Entities;
 
 public class Product(long code,
-    string barcode,
+    string? barcode,
     string url,
     string productName,
     string quantity,
@@ -10,8 +12,9 @@ public class Product(long code,
     string brands,
     string imageUrl)
 {
+    [Key]
     public long Code { get; private set; } = code;
-    public string Barcode { get; private set; } = barcode;
+    public string? Barcode { get; private set; } = barcode;
     public EStatus Status { get; private set; } = EStatus.Draft;
     public DateTime ImportedT { get; private set; }
     public string Url { get; private set; } = url;
